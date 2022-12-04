@@ -30,7 +30,7 @@ let transformAux1;
 let tempBtVec3_1;
 
 //------------Nuevo------------------//
-let convexBreaker = ConvexObjectBreaker();
+//const convexBreaker = new ConvexObjectBreaker();
 let numObjectsToRemove = 0;
 const objectsToRemove = []
 for (let i = 0; i < 500; i++) {
@@ -146,7 +146,7 @@ function createObject(mass, halfExtents, pos, quat, material) {
     );
     object.position.copy(pos);
     object.quaternion.copy(quat);
-    convexBreaker.prepareBreakableObject(object, mass, new THREE.Vector3(), new THREE.Vector3(), true);
+    //convexBreaker.prepareBreakableObject(object, mass, new THREE.Vector3(), new THREE.Vector3(), true);
     createDebrisFromBreakableObject(object);
 }
 
@@ -181,20 +181,21 @@ function createObjects() {
     const numStones = 8;
     quat.set(0, 0, 0, 1);
     for (let i = 0; i < numStones; i++) {
-
         pos.set(0, 2, 15 * (0.5 - i / (numStones + 1)));
-
-        createObject(stoneMass, stoneHalfExtents, pos, quat, createMaterial(0xB0B0B0));
-
+        createBoxWithPhysics(stoneMass, stoneHalfExtents, pos, quat, createMaterial(0xB0B0B0));
     }
 
     // Tower 1
-    // const towerMass = 1000;
-    // const towerHalfExtents = new THREE.Vector3( 2, 5, 2 );
-    // pos.set( - 8, 5, 0 );
-    // quat.set( 0, 0, 0, 1 );
-    // createObject( towerMass, towerHalfExtents, pos, quat, createMaterial( 0xB03014 ) );
 
+    let tx = 5;
+    let ty = tx * 0.5;
+    let tz = tx * 0.5;
+    const towerMass = 1000;
+    //const towerHalfExtents = new THREE.Vector3(tx, ty, tz);
+    pos.set(0, 5, 0);
+    quat.set(0, 0, 0, 1);
+    createObject(tx, ty, tz, towerMass, pos, quat, createMaterial(0xB03014));
+    //createBoxWithPhysics(sx, sy, sz, mass, pos, quat, material) 
     // Muro
     createWall();
 }
@@ -204,10 +205,10 @@ function createWall() {
     const brickLength = 2.5;
     const brickDepth = brickLength * 0.5;
     const brickHeight = brickLength * 0.5;
-    const numBricksLength = 10;
-    const numBricksHeight = 10;
-    const z0 = -numBricksLength * brickLength * 0.5;
-    pos.set(0, brickHeight * 0.5, z0);
+    const numBricksLength = 15;
+    const numBricksHeight = 20;
+    const z0 = (-numBricksLength * brickLength * 0.5) + 1.5;
+    pos.set(15, brickHeight * 0.5, z0);
     quat.set(0, 0, 0, 1);
     for (let j = 0; j < numBricksHeight; j++) {
         //Varía disposición entre filas pares e impares
