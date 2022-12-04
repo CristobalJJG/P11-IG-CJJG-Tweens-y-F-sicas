@@ -175,27 +175,61 @@ function createObjects() {
         }
     );
 
+    let tx, ty, tz, px, py, pz;
     // Stones
     const stoneMass = 120;
-    const stoneHalfExtents = new THREE.Vector3(1, 2, 0.15);
-    const numStones = 8;
+    //const stoneHalfExtents = new THREE.Vector3(1, 2, 0.15);
+    const numStones = 20;
     quat.set(0, 0, 0, 1);
     for (let i = 0; i < numStones; i++) {
-        pos.set(0, 2, 15 * (0.5 - i / (numStones + 1)));
-        createBoxWithPhysics(stoneMass, stoneHalfExtents, pos, quat, createMaterial(0xB0B0B0));
+        tx = 0;
+        ty = 2;
+        tz = 15 * (0.25 - i / (numStones + 1))
+        pageXOffset
+        pos.set(tx, ty, tz);
+        createBoxWithPhysics(1, 2, 0.5, stoneMass, pos, quat, createMaterial(0xB0B0B0));
     }
 
     // Tower 1
-
-    let tx = 5;
-    let ty = tx * 0.5;
-    let tz = tx * 0.5;
+    ty = 5;
+    tx = ty * 0.5;
+    tz = tx * 0.5;
+    px = 9;
+    py = 5;
+    pz = 3;
     const towerMass = 1000;
     //const towerHalfExtents = new THREE.Vector3(tx, ty, tz);
-    pos.set(0, 5, 0);
+    pos.set(px, py, pz);
     quat.set(0, 0, 0, 1);
-    createObject(tx, ty, tz, towerMass, pos, quat, createMaterial(0xB03014));
-    //createBoxWithPhysics(sx, sy, sz, mass, pos, quat, material) 
+    createBoxWithPhysics(tx, ty, tz, towerMass, pos, quat, createMaterial(0xB03014));
+
+    // Tower 2
+    px = 9;
+    py = 5;
+    pz = -3;
+    //const towerHalfExtents = new THREE.Vector3(tx, ty, tz);
+    pos.set(px, py, pz);
+    quat.set(0, 0, 0, 1);
+    createBoxWithPhysics(tx, ty, tz, towerMass, pos, quat, createMaterial(0xB03014));
+
+    // Crea bola como cuerpo rígido y la lanza según coordenadas de ratón
+    const ballMass = 1000;
+    const ballRadius = 0.3;
+    const ball = new THREE.Mesh(
+        new THREE.SphereGeometry(ballRadius, 14, 10),
+        ballMaterial
+    );
+    ball.castShadow = true;
+    ball.receiveShadow = true;
+    //Ammo
+    //Estructura geométrica de colisión esférica
+    const ballShape = new Ammo.btSphereShape(ballRadius);
+    ballShape.setMargin(margin);
+    pos.add(px, py, pz);
+    quat.set(0, 0, 0, 1);
+    createRigidBody(ball, ballShape, ballMass, pos, quat);
+
+
     // Muro
     createWall();
 }
