@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tween y Ammo</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cosas hechas con Tween</h1>
+        <div class="parrafo">
+            <ul>
+                <li>
+                    Se generaron diversas fotos desde <a class="link" href="https://labs.openai.com/">Dall-e</a>, <br/> las que más me gustaron las descargué y las coloqué en la carpeta <b>"Fotos IA"</b>.
+                </li>
+                <li>
+                    Decidí hacer una especie de muestrario de algunas de las fotos que se pueden observar al ejecutar el fichero script <b>"ejercicio_tween.js"</b>.
+                </li>
+            </ul>
+        </div>
+        <h1>Cosas hechas con Ammo</h1>
+        <div class="parrafo">
+            <ul>
+                <li>
+                    Se alteraron los materiales de la bola que se lanza:
+                    <ul>
+                        <li>color: <span class="rect-black"></span> 0x333333</li>
+                        <li>metalness: 1.</li>
+                        <li>roughness: .25</li>
+                        <li>transparent: true</li>
+                        <li>opacity: .75</li>
+                    </ul>
+                    <li>Se cambió la forma de los ladrillos.</li>
+                    <li>Como se cambió la forma, también se cambió la masa.</li>
+                    <li>Apoyandome en
+                        <a class="link" href="https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/HelloWorld.html">
+                            stemkoski.github.com
+                        </a> conseguí colocar las stats de los Frames Por Segundo</li>
+                </li>
+                <li>De la siguiente lista podrían haber salido muchas cosas, pero no ha salido nada, me daban fallos continuos la importación de las librerías.</li>
+                <ul>
+                    <li>Intenté hacer que los bloques se rompieran, pero me fue imposible y no entiendo el porqué no funciona, pero lo dejo implementado en el código para que se vea el <b>"esfuerzo"</b></li>
+                    <li>Intenté hacer que la bola fuese Soft en vez de <b>Rigid</b> (Tampoco salió)</li>
+                </ul>
+
+            </ul>
+        </div>
+    </div>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="./basic_scripts/dat.gui.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+
+    <!--S11-12-->
+    <script src="./basic_scripts/tween.umd.js"></script>
+    <!-- <script src="./ejercicio_tween.js"></script> -->
+
+    <script src="./basic_scripts/ammo.js"></script>
+    <script type="module" src="./basic_scripts/ConvexObjectBreaker.js"></script>
+    <script type="module" src="./basic_scripts/ConvexGeometry.js"></script>
+    <script src="./basic_scripts/BufferGeometryUtils.js"></script>
+    <script src="./basic_scripts/stats.js"></script>
+
+    <script type="module" src="./script_55_ammo.js"></script>
+</body>
+
+</html>
